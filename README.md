@@ -40,6 +40,7 @@ pnpm dev
 confetti-zustand/
 ├── src/
 │   ├── App.tsx
+│   ├── Confetti.tsx
 │   └── store.ts
 ├── .vscode/
 │   └── settings.json

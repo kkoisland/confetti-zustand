@@ -1,74 +1,16 @@
-import { useStore } from './store';
-import Confetti from 'react-confetti';
+// src/App.tsx
+import { useConfettiStore } from './store';
+import { Confetti } from './Confetti';
 
-function App() {
-  const quantity = useStore((s) => s.quantity);
-  const setQuantity = useStore((s) => s.setQuantity);
-
-  const isVisible = useStore((s) => s.isVisible);
-  const setIsVisible = useStore((s) => s.setIsVisible);
-
-  const step = useStore((s) => s.step);
-  const setStep = useStore((s) => s.setStep);
-
-  const showConfetti = () => {
-    setIsVisible(true);
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 3000);
-  };
-
-  const handleConfetti = () => {
-    for (let i = 0; i < quantity; i++) {
-      setTimeout(() => {
-        showConfetti();
-      }, i * 5000); // ← 5000ms 間隔（確実に見える）
-    }
-  };
+// Confettiのボタンとコンポーネントを配置し、アクションをトリガーする
+export default function App() {
+  const trigger = useConfettiStore((s) => s.trigger);
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>🎉 Confetti Demo</h1>
-
-      {/* ナビゲーション */}
-      <div style={{ marginBottom: 20 }}>
-        <button onClick={() => setStep('settings')}>Settings</button>
-        <button onClick={() => setStep('result')}>Result</button>
-      </div>
-
-      {/* settings 画面 */}
-      {step === 'settings' && (
-        <div>
-          <h2>設定</h2>
-          <label>
-            Quantity:{' '}
-            <input
-              type="number"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-            />
-          </label>
-          <br />
-          <button
-            onClick={() => {
-              setStep('result');
-              handleConfetti();
-            }}
-          >
-            次へ
-          </button>
-        </div>
-      )}
-
-      {/* result 画面 */}
-      {step === 'result' && (
-        <>
-          <p>Quantity is: {quantity}</p>
-          {isVisible && <Confetti />}
-        </>
-      )}
+    <div style={{ padding: 40 }}>
+      <h1>Zustand + react-confetti</h1>
+      <button onClick={trigger}>Click Me!</button>
+      <Confetti />
     </div>
   );
 }
-
-export default App;
