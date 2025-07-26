@@ -1,6 +1,6 @@
-// src/App.tsx
-import { useConfettiStore } from './store';
 import { Confetti } from './Confetti';
+import { Settings } from './Settings';
+import { useConfettiStore } from './store';
 
 // Confettiのボタンとコンポーネントを配置し、アクションをトリガーする
 export default function App() {
@@ -8,7 +8,8 @@ export default function App() {
 
   return (
     <div style={{ padding: 40 }}>
-      <h1>Zustand + react-confetti</h1>
+      <h1>Zustand + Confetti Settings</h1>
+      <Settings />
       <button onClick={trigger}>Click Me!</button>
       <Confetti />
     </div>
